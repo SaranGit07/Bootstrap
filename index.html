@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="weather.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-cloud-sun"></i>
+                <span>WeatherPro</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li class="icon"><a href="#maps"><i class="fas fa-map-marked-alt"></i> Maps</a></li>
+                <li class="icon"><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                <li class="icon"><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <div class="container">
+            <header class="header">
+                <div class="headerSub">
+                    
+                    <div>
+                        <video autoplay muted loop playsinline width="150" height="150">
+                            <source src="C:\Users\Saran S\Downloads\Animation - 1744286100205.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                          </video>
+                    </div>
+                    
+                    <div>
+                        <h1><i class="fas fa-cloud-sun"></i> Weather Forecast</h1>
+                        <div class="search-container">
+                            <input type="text" id="cityInput" placeholder="Enter city name..." autocomplete="off">
+                            <button id="searchBtn"><i class="fas fa-search"></i></button>
+                            <div id="citySuggestions" class="city-suggestions"></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="main-content">
+                <div class="index">
+                <div class="current-weather" id="currentWeather">
+                    <div class="weather-card">
+                        <div class="weather-header">
+                            <h2 id="currentCity">Search for a city</h2>
+                            <p id="currentDate">--</p>
+                        </div>
+                        <div class="weather-main">
+                            <div class="temperature">
+                                <img id="currentIcon" src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather icon">
+                                <span id="currentTemp">--°C</span>
+                            </div>
+                            <div class="weather-details">
+                                <p id="currentDesc">--</p>
+                                <div class="details-grid">
+                                    <div class="detail-item">
+                                        <i class="fas fa-temperature-high"></i>
+                                        <span>Feels like: <span id="feelsLike">--°C</span></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-tint"></i>
+                                        <span>Humidity: <span id="humidity">--%</span></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-wind"></i>
+                                        <span>Wind: <span id="windSpeed">-- km/h</span></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-compress-alt"></i>
+                                        <span>Pressure: <span id="pressure">--hPa</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="todays-forecast">
+                    <h2>Today's Forecast</h2>
+                    <div class="hourly-forecast" id="hourlyForecast"></div>
+                </div>
+            </div>
+    
+    
+                <div class="forecast" id="forecast">
+                    <h2>5-Day Forecast</h2>
+                    <div class="forecast-cards" id="forecastCards">
+                        <div class="no-forecast">Search for a city to see the forecast</div>
+                    </div>
+                </div>
+    
+                <div class="recent-searches" id="recentSearches">
+                    <h2>Recent Searches</h2>
+                    <div class="search-list" id="searchList"></div>
+                </div>
+            </main>
+            <div class="metro-cities-container">
+                <h2><i class="fas fa-city"></i> Metro Cities Weather</h2>
+                <div class="metro-cities-track">
+                    <!-- Cities will be added dynamically by JavaScript -->
+                </div>
+            </div>
+            <div class="air-quality-fun">
+                <h2><i class="fas fa-wind"></i> Air Quality Explained (The Fun Way)</h2>
+                
+                <div class="aqi-caution">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Heads up!</strong> Air quality affects your health. On bad days, 
+                        sensitive groups (kids, elderly, pets) should take extra care!
+                    </div>
+                </div>
+                
+                <div class="aqi-levels">
+                    <div class="aqi-level good">
+                        <img src="https://media.giphy.com/media/W0c3xcZ3F1d0EYYb0f/giphy.gif" alt="Happy plant">
+                        <h3>Good (0-50)</h3>
+                        <p>Air is cleaner than your roommate's side of the apartment!</p>
+                        <p><i class="fas fa-check-circle"></i> Perfect for outdoor activities</p>
+                    </div>
+                    
+                    <div class="aqi-level moderate">
+                        <img src="C:\Users\Saran S\Downloads\The Daily Show Wtf GIF by The Daily Show with Trevor Noah.gif" alt="Slightly concerned emoji">
+                        <h3>Moderate (51-100)</h3>
+                        <p>Air is like your gym socks - not terrible but not fresh either</p>
+                        <p><i class="fas fa-info-circle"></i> Sensitive folks might sneeze</p>
+                    </div>
+                    
+                    <div class="aqi-level unhealthy-sensitive">
+                        <img src="https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" alt="Sneezing dog">
+                        <h3>Unhealthy for Sensitive Groups (101-150)</h3>
+                        <p>Air is like sitting behind a diesel truck at a red light</p>
+                        <p><i class="fas fa-mask-face"></i> Asthmatics should carry inhalers</p>
+                    </div>
+                    
+                    <div class="aqi-level unhealthy">
+                        <img src="C:\Users\Saran S\Downloads\Gasp-Sticker GIF by Group Against Smog and Pollution.gif" alt="Coughing cat">
+                        <h3>Unhealthy (151-200)</h3>
+                        <p>Air tastes like someone grilled cheese on a tire fire</p>
+                        <p><i class="fas fa-skull-crossbones"></i> Everyone should limit outdoor time</p>
+                    </div>
+                    
+                    <div class="aqi-level very-unhealthy">
+                        <img src="C:\Users\Saran S\Downloads\episode 9 smoke GIF.gif" alt="Dying plant">
+                        <h3>Very Unhealthy (201-300)</h3>
+                        <p>Air is thicker than your aunt's meatloaf</p>
+                        <p><i class="fas fa-house-user"></i> Stay indoors with windows closed</p>
+                    </div>
+                    
+                    <div class="aqi-level hazardous">
+                        <img src="C:\Users\Saran S\Downloads\Serious Fear GIF by Team Kennedy.gif" alt="Apocalyptic scene">
+                        <h3>Hazardous (301+)</h3>
+                        <p>Air quality makes Mars look like a vacation spot</p>
+                        <p><i class="fas fa-biohazard"></i> Evacuate or seal yourself in a bunker</p>
+                    </div>
+                </div>
+                
+                <div class="aqi-explanation">
+                    <h3><i class="fas fa-book"></i> What is AQI?</h3>
+                    <p class="level-aq" >The Air Quality Index measures how clean or polluted your air is. It focuses on health effects you may experience within a few hours or days after breathing polluted air.</p>
+                    
+                    <h4><i class="fas fa-lungs"></i> What affects AQI?</h4>
+                    <ul>
+                        <li><strong>PM2.5:</strong> Tiny particles from smoke, vehicles (can enter bloodstream)</li>
+                        <li><strong>Ozone:</strong> Created when pollution cooks in sunlight (lung irritant)</li>
+                        <li><strong>Pollen:</strong> Makes allergy sufferers miserable</li>
+                        <li><strong>Wildfire smoke:</strong> Makes everything taste like campfire</li>
+                    </ul>
+                    
+                    <div class="aqi-caution" style="margin-top: 1rem;">
+                        <i class="fas fa-heartbeat"></i>
+                        <div>
+                            <strong>Pro Tip:</strong> On bad air days, use the "recirculate" setting in your car 
+                            and consider an air purifier at home!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weather-tips">
+                <h2><i class="fas fa-lightbulb"></i> Weather Tips</h2>
+                <div class="tips-container">
+                    <div class="tip-card">
+                        <img src="https://cdn-icons-gif.flaticon.com/8722/8722703.gif" alt="Sun protection">
+                        <h3>Sun Protection</h3>
+                        <p>When UV index is high, wear sunscreen, sunglasses, and protective clothing.</p>
+                    </div>
+                    <div class="tip-card">
+                        <img src="https://cdn-icons-gif.flaticon.com/6416/6416395.gif" alt="Rain gear">
+                        <h3>Rain Preparedness</h3>
+                        <p>Always carry an umbrella or raincoat when rain is in the forecast.</p>
+                    </div>
+                    <div class="tip-card">
+                        <img src="https://cdn-icons-gif.flaticon.com/6416/6416338.gif" alt="Cold weather">
+                        <h3>Cold Weather</h3>
+                        <p>Layer your clothing in cold temperatures to maintain body heat.</p>
+                    </div>
+                </div>
+            </div>
+        
+     
+            <div class="error-modal" id="errorModal">
+    
+                <div class="modal-content">
+                    <span class="close-btn" id="closeBtn">&times;</span>
+                    <h3 id="errorTitle">Error</h3>
+                    <p id="errorMessage">City not found. Please try another location.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>About WeatherPro</h3>
+                    <p>Providing accurate weather forecasts worldwide since 2025. Our mission is to help you plan your day with reliable weather information.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Weather Maps</a></li>
+                        <li><a href="#">Radar</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p>support@weatherpro.com</p>
+                    <p>+1 (555) 123-4567</p>
+                    <div class="weather-glossary">
+                        <h4>Weather Terms</h4>
+                        <p><strong>UV Index:</strong> Measures sunburn-producing UV radiation</p>
+                        <p><strong>AQI:</strong> Air Quality Index (0-500 scale)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 WeatherPro. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Information Sections -->
+<div id="maps-info" class="info-section hidden">
+    <div class="map-preview">
+        <!-- <div class="map-type active" data-type="temperature">Temperature</div>
+        <div class="map-type" data-type="precipitation">Precipitation</div>
+        <div class="map-type" data-type="wind">Wind</div> -->
+        <div class="map-display">
+            <!-- <img id="map-image" src="https://maps.openweathermap.com/maps/2.0/weather/TA2/0/0/0?appid=YOUR_API_KEY" alt="Weather Map"> -->
+        </div>
+    </div>
+    <div class="info-content">
+        <span class="close-info">&times;</span>
+        <h2><i class="fas fa-map-marked-alt"></i> Weather Maps</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fas fa-temperature-high"></i>
+                <h3>Temperature Map</h3>
+                <p>Interactive map showing current temperatures across regions with color-coded indicators.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-tint"></i>
+                <h3>Precipitation Map</h3>
+                <p>Real-time rainfall and snowfall visualization with precipitation intensity levels.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-wind"></i>
+                <h3>Wind Map</h3>
+                <p>Live wind speed and direction visualization with animated particle effects.</p>
+            </div>
+        </div>
+        <div class="coming-soon">
+            <p><i class="fas fa-clock"></i> <strong>Coming Soon:</strong> Satellite imagery and storm tracking</p>
+        </div>
+    </div>
+</div>
+
+<div id="about-info" class="info-section hidden">
+    <div class="info-content">
+        <span class="close-info">&times;</span>
+        <h2><i class="fas fa-info-circle"></i> About WeatherPro</h2>
+        <div class="about-content">
+            <img src="https://cdn-icons-png.flaticon.com/512/2936/2936886.png" alt="Weather App" class="about-image">
+            <div class="about-text">
+                <p>WeatherPro provides accurate, real-time weather information to help you plan your day effectively. Our mission is to deliver reliable forecasts with a beautiful, intuitive interface.</p>
+                <h3>Key Features:</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Real-time weather updates</li>
+                    <li><i class="fas fa-check-circle"></i> 5-day detailed forecast</li>
+                    <li><i class="fas fa-check-circle"></i> Hourly weather predictions</li>
+                    <li><i class="fas fa-check-circle"></i> Air quality information</li>
+                    <li><i class="fas fa-check-circle"></i> Severe weather alerts</li>
+                </ul>
+            </div>
+        </div>
+        <div class="tech-stack">
+            <h3>Our Technology</h3>
+            <div class="tech-icons">
+                <i class="fab fa-js" title="JavaScript"></i>
+                <i class="fab fa-html5" title="HTML5"></i>
+                <i class="fab fa-css3-alt" title="CSS3"></i>
+                <i class="fas fa-cloud" title="OpenWeather API"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="contact-info" class="info-section hidden">
+    <!-- <form id="contact-form" class="contact-form">
+        <h3>Send us a message</h3>
+        <div class="form-group">
+            <input type="text" id="contact-name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+            <input type="email" id="contact-email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+            <textarea id="contact-message" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="contact-btn">Send Message</button>
+    </form> -->
+    <div class="info-content">
+        <span class="close-info">&times;</span>
+        <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fas fa-envelope-open-text"></i>
+                <h3>Email Us</h3>
+                <p>support@weatherpro.com</p>
+                <p>feedback@weatherpro.com</p>
+                <a href="mailto:support@weatherpro.com" class="contact-btn">Send Email</a>
+            </div>
+            <div class="contact-card">
+                <i style="transform: rotate(100deg)" class="fas fa-phone-alt"></i>
+                <h3>Call Us</h3>
+                <p>+1 (555) 123-4567</p>
+                <p>Mon-Fri: 9AM-5PM EST</p>
+                <a href="tel:+15551234567" class="contact-btn">Call Now</a>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Visit Us</h3>
+                <p>123 Weather Lane</p>
+                <p>Cloud City, WC 98765</p>
+                <!-- <a href="#" class="contact-btn">Get Directions</a> -->
+                <a href="https://www.google.com/maps/place/Coimbatore,+Tamil+Nadu/@11.0141263,76.8848326,12z/data=!3m1!4b1!4m6!3m5!1s0x3ba859af2f971cb5:0x2fc1c81e183ed282!8m2!3d11.0168445!4d76.9558321!16zL20vMDE5ZmM0?entry=ttu&g_ep=EgoyMDI1MDQyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-btn">Get Directions</a>
+
+            </div>
+        </div>
+        <div class="social-contact">
+            <h3>Connect With Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+      
+
+    <script src="script.js"></script>
+</body>
+</html>
