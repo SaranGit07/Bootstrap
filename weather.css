@@ -1124,6 +1124,8 @@ body {
     display: flex;
     gap: 1rem;
     margin-bottom: 1.5rem;
+    
+
 }
 
 .social-icons a {
@@ -1136,6 +1138,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
+    text-decoration: none;
 }
 
 .social-icons a:hover {
@@ -1686,11 +1689,14 @@ body {
 .social-contact {
     text-align: center;
     margin-top: 30px;
+
 }
 
 .social-contact .social-icons {
     justify-content: center;
     margin-top: 15px;
+    text-decoration: none;
+   
 }
 
 /* Responsive Styles */
